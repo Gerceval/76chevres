@@ -1,0 +1,18 @@
+CREATE DATABASE 76chevres;
+
+USE 76chevres;
+
+CREATE TABLE user (
+  id INT NOT NULL AUTO INCREMENT PRIMARY KEY,
+  pseudo VARCHAR,
+  mail VARCHAR,
+  type VARCHAR
+);
+
+CREATE TABLE quote (
+  id INT NOT NULL AUTO INCREMENT PRIMARY KEY,
+  image LONGBLOB NULL,
+  url_img VARCHAR(5000) NULL,
+  citation VARCHAR,
+  like_count INT DEFAULT 0
+);
