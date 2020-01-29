@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import HomeQuotes from './HomeQuotes';
+import HomeQuotes from './HomeQuotes/HomeQuotes';
 
 class Homepage extends Component {
   constructor(props) {

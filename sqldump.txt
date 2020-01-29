@@ -1,27 +1,37 @@
+DROP DATABASE 76chevres;
+
 CREATE DATABASE 76chevres;
 
 USE 76chevres;
 
 CREATE TABLE user (
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  pseudo VARCHAR(20),
+  pseudo VARCHAR(20) NOT NULL DEFAULT 'un pégu',
   mail VARCHAR(50),
-  profil_type VARCHAR(12) DEFAULT 'user
+  profil_type VARCHAR(12) DEFAULT 'user'
 );
 
 CREATE TABLE quote (
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   personnage VARCHAR(80),
   citation VARCHAR (5000),
-  like_count INT DEFAULT 0
+  like_count INT DEFAULT 0,
   image LONGBLOB NULL,
   url_img VARCHAR(5000) NULL,
+  id_uploader INT NOT NULL,
+  FOREIGN KEY (id_uploader) REFERENCES user(id)
 );
 
-INSERT INTO user (pseudo, mail) values (
-  'Gerceval', 'gerceval@gmail.com', 'Karadark', 'karadark@gmail.com'
-);
+INSERT INTO user (pseudo, mail)
+  VALUES 
+  ('Gerceval', 'gerceval@gmail.com'),
+  ('Karadark', 'karadark@gmail.com')
+;
 
-INSERT INTO quote (personnage, url_img, citation) values (
-  'Perceval', 'http://fr.web.img3.acsta.net/newsv7/16/11/25/16/38/164818.jpg', "C'est pas faux"
-);
+INSERT INTO quote (personnage, url_img, citation, id_uploader) 
+  VALUES 
+  ('Perceval', 'http://fr.web.img3.acsta.net/newsv7/16/11/25/16/38/164818.jpg', "C'est pas faux", 1),
+  ('Karadoc', 'https://i.skyrock.net/0872/38070872/pics/1486167394.jpg', "La joie de vivre et le jambon ! Y'a pas 36 solutions au bonheur !", 1),
+  ('Arthur', 'http://fr.web.img4.acsta.net/r_640_360/newsv7/19/01/27/15/43/1278026.jpg', "Sortez-vous les doigts du cul !", 1),
+  ('Kadok', 'https://media.firerank.com/upload/dli/149/5464dedc916a4.jpg', "Le caca des canards c'est caca, faut pas toucher", 1)
+;

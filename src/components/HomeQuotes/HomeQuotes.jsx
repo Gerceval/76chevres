@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import HomeQuotesList from './HomeQuotesList';
 
 class HomeQuotes extends Component {
   constructor(props) {
@@ -22,8 +23,9 @@ class HomeQuotes extends Component {
   }
 
   render() {
+    const { quotes } = this.state;
     return (
-      <p>lol</p>
+      <HomeQuotesList quotes={quotes} />
     );
   }
 }
