@@ -14,7 +14,7 @@ const HomeQuotesList = props => {
         >
           <div className="quote-buttons-count">
             <div>
-              <Fab size="big" color="primary">
+              <Fab onClick={() => props.upVote(quote.quoteId)} size="big" color="primary">
                 <ThumbUp />
               </Fab>
             </div>
@@ -24,7 +24,7 @@ const HomeQuotesList = props => {
               </Avatar>
             </div>
             <div>
-              <Fab size="big" color="secondary">
+              <Fab onClick={() => props.downVote(quote.quoteId)} size="big" color="secondary">
                 <ThumbDown />
               </Fab>
             </div>

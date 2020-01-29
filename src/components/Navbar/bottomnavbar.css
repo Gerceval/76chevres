@@ -1,0 +1,7 @@
+.bottom-navbar {
+  display: grid;
+  grid-template-columns: 33vw 33vw 33vw;
+  grid-template-rows: 8vh;
+  align-items: center;
+  background-color: white;
+}

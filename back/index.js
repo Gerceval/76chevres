@@ -14,7 +14,20 @@ app.use(
 
 // GET ALL QUOTES
 app.get('/76/quotes', (req, res) => {
-  connection.query('SELECT q.*, u.* from quote AS q JOIN user AS u on u.id = q.id_uploader', (err, results) => {
+  connection.query('SELECT q.*, q.id AS quoteId, u.* from quote AS q JOIN user AS u on u.id = q.id_uploader ORDER BY q.like_count DESC', (err, results) => {
+    if (err) {
+      res.status(500).send('Error');
+      console.log(err)
+    } else {
+      res.json(results);
+    }
+  });
+});
+
+// GET ALL USERS
+app.get('/76/users/:mail/:pseudo', (req, res) => {
+  const { mail, pseudo } = req.params;
+  connection.query(`SELECT * FROM user WHERE email = ${mail} AND pseudo = ${pseudo}`, (err, results) => {
     if (err) {
       res.status(500).send('Error');
       console.log(err)
@@ -44,6 +57,42 @@ app.delete('/76/quote/:id', (req, res) => {
       res.status(500).send('Error');
     } else {
       res.status(201).send(`Quote deleted`);
+    }
+  });
+});
+
+// UPVOTE 1 QUOTE
+app.put('/76/upvote/quote/:id', (req, res) => {
+  const { id } = req.params;
+  connection.query(`UPDATE quote SET like_count = like_count + 1 WHERE id = ${id}`, err => {
+    if (err) {
+      res.status(500).send('Error');
+    } else {
+      res.status(201).send(`Quote deleted`);
+    }
+  });
+});
+
+// DOWNVOTE 1 QUOTE
+app.put('/76/downvote/quote/:id', (req, res) => {
+  const { id } = req.params;
+  connection.query(`UPDATE quote SET like_count = like_count - 1 WHERE id = ${id}`, err => {
+    if (err) {
+      res.status(500).send('Error');
+    } else {
+      res.status(201).send(`Quote deleted`);
+    }
+  });
+});
+
+// CREATE USER
+app.post('/76/user/create', (req, res) => {
+  const formData = req.body;
+  connection.query('INSERT INTO user SET ?', formData, err => {
+    if (err) {
+      res.status(500).send('Error');
+    } else {
+      res.status(201).send('User created');
     }
   });
 });

@@ -9,6 +9,8 @@ class HomeQuotes extends Component {
       quotes: []
      };
      this.getQuotes = this.getQuotes.bind(this);
+     this.upVote = this.upVote.bind(this);
+     this.downVote = this.downVote.bind(this);
   }
 
   componentDidMount() {
@@ -22,10 +24,22 @@ class HomeQuotes extends Component {
       .then(data => this.setState({ quotes: data }));
   }
 
+  upVote(quoteId) {
+    axios 
+      .put(`/76/upvote/quote/${quoteId}/`)
+      .then(this.getQuotes())
+  }
+
+  downVote(quoteId) {
+    axios 
+      .put(`/76/downvote/quote/${quoteId}/`)
+      .then(this.getQuotes())
+  }
+
   render() {
     const { quotes } = this.state;
     return (
-      <HomeQuotesList quotes={quotes} />
+      <HomeQuotesList quotes={quotes} upVote={this.upVote} downVote={this.downVote} />
     );
   }
 }

@@ -2,6 +2,12 @@
   z-index: 5;
   position: fixed;
   top: 80vh;
-  left: 70vw;
+  left: 74vw;
   height: 0px;
+}
+
+.homepage-bottom-navbar {
+  z-index: 5;
+  position: fixed;
+  top: 92vh;
 }
