@@ -24,7 +24,7 @@ app.get('/76/quotes', (req, res) => {
   });
 });
 
-// GET ALL USERS
+// GET 1 LOGGED USER
 app.get('/76/users/:mail/:pseudo', (req, res) => {
   const { mail, pseudo } = req.params;
   connection.query(`SELECT * FROM user WHERE email = ${mail} AND pseudo = ${pseudo}`, (err, results) => {

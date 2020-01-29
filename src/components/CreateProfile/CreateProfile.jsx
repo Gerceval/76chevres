@@ -7,8 +7,8 @@ class CreateProfile extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      pseudo: '',
-      mail: ''
+      pseudo: null,
+      mail: null
      };
      this.handleInputChange = this.handleInputChange.bind(this);
      this.handleSubmit = this.handleSubmit.bind(this);

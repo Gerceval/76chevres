@@ -6,28 +6,32 @@ import AddQuote from './AddQuote/AddQuote';
 import './homepage.css';
 import BottomNavbar from './Navbar/BottomNavbar';
 import CreateProfile from './CreateProfile/CreateProfile';
+import SignIn from './CreateProfile/SignIn';
+import Profile from './Profile/Profile';
 
 class Homepage extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      user: null
-    };
-    this.getUser = this.getUser.bind(this);
+    this.state = { };
+    this.checkUser = this.checkUser.bind(this);
   }
 
-  getUser(userId) {
-    this.setState({
-      user: userId
-    })
+  componentDidMount() {
+    this.checkUser();
+  }
+
+  checkUser() {
+    const pseudo = localStorage.getItem('pseudo');
+    const mail = localStorage.getItem('mail');
+    this.setState({ pseudo, mail })
   }
 
   render() {
-    const { user } = this.state;
+    const { pseudo } = this.state;
     return (
       <div className="render-homepage">
         <div className="homepage-bottom-navbar">
-          <BottomNavbar user={user} getUser={this.getUser} />
+          <BottomNavbar pseudo={pseudo} getUser={this.getUser} />
         </div>
         <Switch>
           <Route
@@ -50,10 +54,26 @@ class Homepage extends Component {
             )}
           />
           <Route
+            path="/login"
+            render={() => (
+              <>
+                <SignIn />
+              </>
+            )}
+          />
+          <Route
             path="/createprofile"
             render={() => (
               <>
                 <CreateProfile />
+              </>
+            )}
+          />
+          <Route
+            path="/profile"
+            render={() => (
+              <>
+                <Profile />
               </>
             )}
           />
