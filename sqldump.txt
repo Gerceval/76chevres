@@ -3,16 +3,25 @@ CREATE DATABASE 76chevres;
 USE 76chevres;
 
 CREATE TABLE user (
-  id INT NOT NULL AUTO INCREMENT PRIMARY KEY,
-  pseudo VARCHAR,
-  mail VARCHAR,
-  type VARCHAR
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  pseudo VARCHAR(20),
+  mail VARCHAR(50),
+  profil_type VARCHAR(12) DEFAULT 'user
 );
 
 CREATE TABLE quote (
-  id INT NOT NULL AUTO INCREMENT PRIMARY KEY,
+  id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  personnage VARCHAR(80),
+  citation VARCHAR (5000),
+  like_count INT DEFAULT 0
   image LONGBLOB NULL,
   url_img VARCHAR(5000) NULL,
-  citation VARCHAR,
-  like_count INT DEFAULT 0
+);
+
+INSERT INTO user (pseudo, mail) values (
+  'Gerceval', 'gerceval@gmail.com', 'Karadark', 'karadark@gmail.com'
+);
+
+INSERT INTO quote (personnage, url_img, citation) values (
+  'Perceval', 'http://fr.web.img3.acsta.net/newsv7/16/11/25/16/38/164818.jpg', "C'est pas faux"
 );

@@ -13,10 +13,11 @@ app.use(
 );
 
 // GET ALL QUOTES
-app.get('/76/quote', (req, res) => {
+app.get('/76/quotes', (req, res) => {
   connection.query('SELECT * from quote', (err, results) => {
     if (err) {
       res.status(500).send('Error');
+      console.log(err)
     } else {
       res.json(results);
     }
