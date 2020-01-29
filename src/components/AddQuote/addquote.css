@@ -1,0 +1,12 @@
+.addquote-modal {
+  width: 80vw;
+  height: 80vh;
+  position: absolute;
+  left: 10vw;
+  top: 8vh;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 20px auto 20px;
+  grid-template-rows: 20px auto 20px auto 20px auto 20px;
+}

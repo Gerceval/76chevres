@@ -1,0 +1,7 @@
+.homepage-addquote-button {
+  z-index: 5;
+  position: fixed;
+  top: 80vh;
+  left: 70vw;
+  height: 0px;
+}
