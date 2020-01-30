@@ -11,6 +11,7 @@ class HomeQuotes extends Component {
      this.getQuotes = this.getQuotes.bind(this);
      this.upVote = this.upVote.bind(this);
      this.downVote = this.downVote.bind(this);
+     this.deleteQuote = this.deleteQuote.bind(this);
   }
 
   componentDidMount() {
@@ -36,10 +37,16 @@ class HomeQuotes extends Component {
       .then(this.getQuotes())
   }
 
+  deleteQuote(quoteId) {
+    axios
+      .delete(`76/quote/${quoteId}`)
+      .then(this.getQuotes())
+  }
+
   render() {
     const { quotes } = this.state;
     return (
-      <HomeQuotesList quotes={quotes} upVote={this.upVote} downVote={this.downVote} />
+      <HomeQuotesList quotes={quotes} upVote={this.upVote} downVote={this.downVote} delete={this.deleteQuote} />
     );
   }
 }

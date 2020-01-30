@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardMedia, CardContent, Typography, Fab, Avatar } from '@material-ui/core';
+import { Card, CardMedia, CardContent, Typography, Fab, Avatar, Button } from '@material-ui/core';
 import { ThumbUp, ThumbDown } from '@material-ui/icons';
 import './quotes.css';
 
@@ -41,6 +41,9 @@ const HomeQuotesList = props => {
         <Typography variant="caption" color="textSecondary" component="p">
           envoyé par {quote.pseudo}
         </Typography>
+        <Button onClick={() => props.delete(quote.quoteId)} variant="outlined" color="secondary">
+          supprimer
+        </Button>
       </Card>
     )
   })

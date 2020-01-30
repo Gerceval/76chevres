@@ -7,10 +7,8 @@ class SignIn extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inputs: {
-        pseudo: '',
-        mail: ''
-      }
+      pseudo: '',
+      mail: ''
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -21,14 +19,14 @@ class SignIn extends Component {
   };
 
   handleSubmit(e) {
-    const { pseudo, mail } = this.state.inputs;
+    const { pseudo, mail } = this.state;
     e.preventDefault();
     axios
       .get(`/76/users/${mail}/${pseudo}`)
       .then(res => res.data)
-      .then(data => this.setState({ inputs: data }))
+      .then(data => this.setState({ data }))
       .then(
-        localStorage.setItem('pseudo', pseudo), 
+        localStorage.setItem('pseudo', pseudo),
         localStorage.setItem('mail', mail)
       )
   }
