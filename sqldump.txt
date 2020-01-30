@@ -8,7 +8,8 @@ CREATE TABLE user (
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   pseudo VARCHAR(20) NOT NULL DEFAULT 'un pégu',
   mail VARCHAR(50),
-  profil_type VARCHAR(12) DEFAULT 'user'
+  profil_type VARCHAR(12) DEFAULT 'user',
+  UNIQUE (pseudo)
 );
 
 CREATE TABLE quote (
@@ -23,10 +24,11 @@ CREATE TABLE quote (
   FOREIGN KEY (id_uploader) REFERENCES user(id)
 );
 
-INSERT INTO user (pseudo, mail)
+INSERT INTO user (pseudo, mail, profil_type)
   VALUES 
-  ('Gerceval', 'gerceval@gmail.com'),
-  ('Karadark', 'karadark@gmail.com')
+  ('Gerceval', 'gerceval@gmail.com', 'user'),
+  ('Karadark', 'karadark@gmail.com', 'user'),
+  ('admin', 'admin', 'admin')
 ;
 
 INSERT INTO quote (personnage, url_img, citation, id_uploader) 

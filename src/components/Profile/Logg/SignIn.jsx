@@ -26,7 +26,7 @@ class SignIn extends Component {
       .get(`/76/users/${mail}/${pseudo}`)
       .then(res =>  res.data)
       .then(data => this.setState({ user: data }))
-      .then(this.props.handleConnection())
+      .then(() => this.props.handleConnection(this.state.user))
   }
 
   render() {

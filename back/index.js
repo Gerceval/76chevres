@@ -100,11 +100,12 @@ app.put('/76/downvote/quote/:id', (req, res) => {
 // CREATE USER
 app.post('/76/user', (req, res) => {
   const formData = req.body;
-  connection.query('INSERT INTO user SET ?', formData, err => {
+  connection.query(`INSERT INTO user SET ?`, formData, err => {
     if (err) {
-      res.status(500).send('Error');
+      res.sendStatus(500);
+      console.log(err)
     } else {
-      res.status(201).send('User created');
+      res.sendStatus(201);
     }
   });
 });

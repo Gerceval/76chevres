@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch, NavLink } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import HomeQuotes from './HomeQuotes/HomeQuotes';
 import AddQuoteButton from './AddQuote/AddQuoteButton';
 import AddQuote from './AddQuote/AddQuote';
@@ -19,11 +19,15 @@ class Homepage extends Component {
     this.handleConnection = this.handleConnection.bind(this);
   }
 
-  handleConnection() {
-    const { isConnected, adminLogged } = this.state;
+  handleConnection(user) {
+    const { isConnected } = this.state;
     this.setState({
-      isConnected: !isConnected
+      isConnected: !isConnected,
+      user
     })
+    if (user[0].profil_type === 'admin') {
+      this.setState({ adminLogged: true, isConnected: false })
+    }
   }
 
   render() {
