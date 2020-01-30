@@ -8,40 +8,35 @@ import VisibilityRoundedIcon from '@material-ui/icons/VisibilityRounded';
 import './bottomnavbar.css';
 
 class BottomNavbar extends Component {
-  state = { }
-
-  componentDidMount() {
-    const pseudo = localStorage.getItem('pseudo');
-    const mail = localStorage.getItem('mail');
-    this.setState({ pseudo, mail })
-  }
+  state = {}
 
   render() {
-    const { pseudo, mail } = this.state;
     let goProfile;
+    const { isConnected } = this.props;
 
-    if (pseudo === null && mail === null) {
-      goProfile = (
-      <NavLink to="/login">
-        <AccountCircleRoundedIcon color="primary" fontSize="large" />
-      </NavLink>
-    )} else {
+    if (isConnected === true) {
       goProfile = (
         <NavLink to="/profile">
-        <AccountCircleRoundedIcon color="primary" fontSize="large" />
-      </NavLink>
+          <AccountCircleRoundedIcon color="primary" fontSize="large" />
+        </NavLink>
+      )
+    } else if (isConnected === false) {
+      goProfile = (
+        <NavLink to="/login">
+          <AccountCircleRoundedIcon color="primary" fontSize="large" />
+        </NavLink>
       )
     }
 
     return (
       <div className="bottom-navbar">
         <div className="bottom-navbar-useless">
-          <NavLink to="/">
+          <NavLink to="/homepage">
             <VisibilityRoundedIcon color="primary" fontSize="large" />
           </NavLink>
         </div>
         <div className="bottom-navbar-homepage">
-          <NavLink to="/">
+          <NavLink to="/homepage">
             <HomeRoundedIcon color="primary" fontSize="large" />
           </NavLink>
         </div>

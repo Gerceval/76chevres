@@ -8,33 +8,34 @@ import BottomNavbar from './Navbar/BottomNavbar';
 import CreateProfile from './CreateProfile/CreateProfile';
 import SignIn from './CreateProfile/SignIn';
 import Profile from './Profile/Profile';
+import { is } from '@babel/types';
 
 class Homepage extends Component {
   constructor(props) {
     super(props);
-    this.state = { };
-    this.checkUser = this.checkUser.bind(this);
+    this.state = { 
+      isConnected: false      
+    };
+    this.handleConnection = this.handleConnection.bind(this);
   }
 
-  componentDidMount() {
-    this.checkUser();
-  }
-
-  checkUser() {
-    const pseudo = localStorage.getItem('pseudo');
-    const mail = localStorage.getItem('mail');
-    this.setState({ pseudo, mail })
+  handleConnection() {
+    const { isConnected } = this.state;
+    this.setState({
+      isConnected: !isConnected
+    })
   }
 
   render() {
+    const { isConnected } = this.state;
     return (
       <div className="render-homepage">
         <div className="homepage-bottom-navbar">
-          <BottomNavbar />
+          <BottomNavbar isConnected={isConnected} />
         </div>
         <Switch>
           <Route
-            exact path="/"
+            exact path="/homepage"
             render={() => (
               <div className="homepage">
                 <div className="homepage-addquote-button">
@@ -56,7 +57,7 @@ class Homepage extends Component {
             path="/login"
             render={() => (
               <>
-                <SignIn />
+                <SignIn handleConnection={this.handleConnection} isConnected={isConnected} />
               </>
             )}
           />
@@ -72,7 +73,7 @@ class Homepage extends Component {
             path="/profile"
             render={() => (
               <>
-                <Profile />
+                <Profile handleConnection={this.handleConnection} isConnected={isConnected} />
               </>
             )}
           />

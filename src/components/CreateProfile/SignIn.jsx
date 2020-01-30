@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import { TextField, Button } from '@material-ui/core/';
 import axios from 'axios';
 
@@ -8,7 +9,7 @@ class SignIn extends Component {
     super(props);
     this.state = {
       pseudo: '',
-      mail: ''
+      mail: '',
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,14 +26,15 @@ class SignIn extends Component {
       .get(`/76/users/${mail}/${pseudo}`)
       .then(res => res.data)
       .then(data => this.setState({ data }))
-      .then(
-        localStorage.setItem('pseudo', pseudo),
-        localStorage.setItem('mail', mail)
-      )
+      .then(this.props.handleConnection())
   }
 
   render() {
     const { pseudo, mail } = this.state;
+    const { isConnected } = this.props;
+    if (isConnected) {
+      return <Redirect to="/homepage" />
+    }
     return (
       <div className="render-create-user">
         <TextField label="Pseudo" name="pseudo" value={pseudo} onChange={this.handleInputChange} variant="outlined" />
