@@ -1,3 +1,7 @@
+.homepage {
+  margin-bottom: 15vh;
+}
+
 .homepage-addquote-button {
   z-index: 5;
   position: fixed;

@@ -62,7 +62,7 @@ class HomeQuotes extends Component {
     }
   }
 
-  expandCard(quoteId) {
+  expandCard(e, quoteId) {
     const { cardExpanded } = this.state;
     this.setState({
       cardExpanded: !cardExpanded

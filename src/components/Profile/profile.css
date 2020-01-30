@@ -5,3 +5,13 @@
 .isEditing {
   display: none;
 }
+
+.editmyquotes-delete-edit-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile-editmyquotes {
+  margin-bottom: 10vh;
+}

@@ -3,6 +3,7 @@ import { TextField, Button } from '@material-ui/core/';
 import Alert from '@material-ui/lab/Alert';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
+import './logg.css';
 
 
 class SignUp extends Component {
@@ -48,10 +49,16 @@ class SignUp extends Component {
       return <Redirect to="/signin" />
     }
     return (
-      <div className="render-create-user">
-        <TextField label="Pseudo" name="pseudo" value={pseudo} onChange={this.handleInputChange} variant="outlined" />
-        <TextField label="Mail" name="mail" value={mail} onChange={this.handleInputChange} variant="outlined" />
-        <Button onClick={this.handleSubmit} color="primary">Créer mon compte</Button>
+      <div className="render-signup">
+        <div className="signup-pseudo">
+          <TextField label="Pseudo" name="pseudo" value={pseudo} onChange={this.handleInputChange} variant="outlined" />
+        </div>
+       <div className="signup-mail">
+          <TextField label="Mail" name="mail" value={mail} onChange={this.handleInputChange} variant="outlined" />
+        </div>
+        <div className="signup-submit">
+          <Button onClick={this.handleSubmit} variant="outlined" color="primary">Créer mon compte</Button>
+        </div>
         {errorOccured && <Alert severity="error">This is an error alert — check it out!</Alert>}
       </div>
     );

@@ -47,11 +47,11 @@ const HomeQuotesList = props => {
           </Typography>
         </CardContent>
         <CardActions>
-          <IconButton className="quote-expand-on" onClick={() => props.expandCard(quote.quoteId)}>
+          <IconButton value={quote.quoteId} className="quote-expand-on" onClick={() => props.expandCard(quote.quoteId)}>
             <MoreHoriz />
           </IconButton>
         </CardActions>
-        <Collapse in={props.cardExpanded} timeout="auto" unmountOnExit>
+        <Collapse value={quote.quoteId} in={props.cardExpanded} timeout="auto" unmountOnExit>
           <CardContent>
             <Typography variant="caption" color="textSecondary" component="p">
               créé par {quote.pseudo} le {date}

@@ -1,0 +1,41 @@
+.render-signup {
+  display: grid;
+  grid-template-rows: 10vh 20vh 20vh 15vh 20vh;
+  grid-template-columns: 10vw 80vw 10vw;
+}
+
+.signup-pseudo {
+  grid-area: 2 / 2 / 2 / 2;
+}
+
+.signup-mail {
+  grid-area: 3 / 2 / 3 / 2;
+}
+
+.signup-submit {
+  grid-area: 4 / 2 / 4 / 2;
+}
+
+/* ----------- SIGN IN ----------- */
+
+.render-signin {
+  display: grid;
+  grid-template-rows: 10vh 20vh 20vh 15vh 20vh;
+  grid-template-columns: 10vw 80vw 10vw;
+}
+
+.signin-pseudo {
+  grid-area: 2 / 2 / 2 / 2;
+}
+
+.signin-mail {
+  grid-area: 3 / 2 / 3 / 2;
+}
+
+.signin-submit {
+  grid-area: 4 / 2 / 4 / 2;
+}
+
+.signin-go-signup {
+  grid-area: 5 / 2 / 5 / 2;
+}

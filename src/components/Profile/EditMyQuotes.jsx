@@ -32,16 +32,24 @@ const HomeQuotesList = props => {
             <Typography className="editmyquotes-date" variant="caption" color="textSecondary" component="p">
               créé le {date}
             </Typography>
-            <Button onClick={() => props.delete(quote.quoteId)} variant="outlined" color="secondary">
-              supprimer
+            <div className="editmyquotes-delete-edit-buttons">
+              <Button onClick={() => props.delete(quote.quoteId)} variant="outlined" color="secondary">
+                supprimer
             </Button>
-            <Button onClick={() => props.editQuote(quote.quoteId)} variant="outlined" color="secondary">
-              editer
+              <Button onClick={() => props.editQuote(quote.quoteId)} variant="outlined" color="secondary">
+                editer
             </Button>
+            </div>
           </CardContent>
         </div>
         {isEditing &&
-          <AddQuote citation={quote.citation} personnage={quote.personnage} url_img={quote.url_img} userLogged={userLogged} isEditing={isEditing} quoteId={quote.quoteId} />
+          <AddQuote
+            citation={quote.citation}
+            personnage={quote.personnage}
+            url_img={quote.url_img}
+            userLogged={userLogged}
+            isEditing={isEditing}
+            quoteId={quote.quoteId} />
         }
       </Card>
     )
