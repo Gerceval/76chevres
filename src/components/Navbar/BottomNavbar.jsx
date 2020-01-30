@@ -10,10 +10,6 @@ import './bottomnavbar.css';
 class BottomNavbar extends Component {
   state = { }
 
-  getUser(userId) {
-    this.props.getUser(userId)
-  }
-
   componentDidMount() {
     const pseudo = localStorage.getItem('pseudo');
     const mail = localStorage.getItem('mail');

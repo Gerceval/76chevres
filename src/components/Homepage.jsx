@@ -27,11 +27,10 @@ class Homepage extends Component {
   }
 
   render() {
-    const { pseudo } = this.state;
     return (
       <div className="render-homepage">
         <div className="homepage-bottom-navbar">
-          <BottomNavbar pseudo={pseudo} getUser={this.getUser} />
+          <BottomNavbar />
         </div>
         <Switch>
           <Route
