@@ -81,13 +81,17 @@ class Homepage extends Component {
           <Route
             path="/profile"
             render={() => (
-              <>
-                <Profile
-                  userId={this.state.user[0].id}
-                  handleSignOut={this.handleSignOut}
-                  userLogged={userLogged}
-                />
-              </>
+              <div>
+                {this.state.user ?
+                  <Profile
+                    userId={this.state.user[0].id}
+                    handleSignOut={this.handleSignOut}
+                    userLogged={userLogged}
+                  />
+                  :
+                  <Redirect to="homepage" />
+                }
+              </div>
             )}
           />
           <Route

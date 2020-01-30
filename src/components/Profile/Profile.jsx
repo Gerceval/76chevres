@@ -16,7 +16,7 @@ class Profile extends Component {
     }
     return (
       <>
-        <MyQuotes userId={userId} />
+        <MyQuotes userId={userId} userLogged={userLogged} />
         <Button onClick={this.props.handleSignOut}>Se Déconnecter</Button>
       </>
     );

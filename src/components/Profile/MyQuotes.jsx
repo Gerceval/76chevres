@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import EditMyQuotes from './EditMyQuotes';
+import './profile.css';
 
 class MyQuotes extends Component {
   constructor(props) {
     super(props);
-    this.state = {  };
+    this.state = { 
+      isEditing: false
+     };
     this.getMyQuotes = this.getMyQuotes.bind(this);
+    this.deleteQuote = this.deleteQuote.bind(this);
+    this.editQuote = this.editQuote.bind(this);
   }
 
   componentDidMount() {
@@ -20,10 +26,27 @@ class MyQuotes extends Component {
       .then(data => this.setState({ quotes: data }));
   }
 
+  deleteQuote(quoteId) {
+    axios
+      .delete(`76/quote/${quoteId}`)
+      .then(this.getMyQuotes())
+  }
+
+  editQuote() {
+    this.setState({ isEditing: 'isEditing' })
+  }
+
   render() {
+    const { quotes, isEditing } = this.state;
+    const { userLogged } = this.props;
     return (
-      <p>yo</p>
-    );
+      <div>
+        <h2>Editer mes quotes</h2>
+        <div className="profile-editmyquotes">
+          {quotes ? <EditMyQuotes quotes={quotes} delete={this.deleteQuote} isEditing={isEditing} editQuote={this.editQuote} userLogged={userLogged} /> : <p>0 quotes</p>}
+        </div>
+      </div>
+    )
   }
 }
 

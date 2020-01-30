@@ -110,6 +110,19 @@ app.put('/76/downvote/quote/:id', (req, res) => {
   });
 });
 
+// EDIT 1 QUOTE
+app.put('/76/quote/edit/:id', (req, res) => {
+  const { id } = req.params;
+  const formData = req.body;
+  connection.query(`UPDATE quote SET ? WHERE id = ${id}`, formData, err => {
+    if (err) {
+      res.status(500).send('Error');
+    } else {
+      res.status(201).send(`Quote edited`);
+    }
+  });
+});
+
 // CREATE USER
 app.post('/76/user', (req, res) => {
   const formData = req.body;
