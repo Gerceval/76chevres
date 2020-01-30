@@ -1,28 +1,36 @@
 import React, { Component } from 'react';
 import { Button } from '@material-ui/core';
-import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 class Profile extends Component {
   constructor(props) {
     super(props);
-    this.state = {  };
+    this.state = {
+      redirect: null
+    };
     this.disconnect = this.disconnect.bind(this);
+    this.redirect = this.redirect.bind(this);
   }
 
-  // getUser() {
-  //   const pseudo = localStorage.getItem('pseudo');
-  //   const mail = localStorage.getItem('mail');
-  //   axios
-  //     .get(`/76/users/${mail}/${pseudo}`)
-  // }
+  componentDidMount() {
+    console.log('bonjouryo')
+  }
 
-  disconnect() {
-    localStorage.removeItem('mail');
-    localStorage.removeItem('pseudo');
-    console.log('yo')
+  disconnect(e) {
+    e.preventDefault();
+    localStorage.clear()
+    this.redirect();
+  }
+
+  redirect() {
+    this.setState({ redirect: '/' })
   }
 
   render() {
+    const { redirect } = this.state;
+    if (redirect) {
+      return <Redirect to={redirect} />
+    }
     return (
       <Button onClick={this.disconnect}>Se Déconnecter</Button>
     );

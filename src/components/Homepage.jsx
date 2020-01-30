@@ -12,7 +12,10 @@ import Profile from './Profile/Profile';
 class Homepage extends Component {
   constructor(props) {
     super(props);
-    this.state = { };
+    this.state = { 
+      pseudo: null,
+      mail: null
+     };
     this.checkUser = this.checkUser.bind(this);
   }
 
