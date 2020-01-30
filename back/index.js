@@ -36,6 +36,19 @@ app.get('/76/quotes/recent', (req, res) => {
   });
 });
 
+// GET ALL QUOTES FROM USER
+app.get('/76/quotes/user/:id', (req, res) => {
+  const { id } = req.params;
+  connection.query(`SELECT q.*, q.id AS quoteId, u.* from quote AS q JOIN user AS u on u.id = q.id_uploader WHERE q.id_uploader = ${id}`, (err, results) => {
+    if (err) {
+      res.status(500).send('Error');
+      console.log(err)
+    } else {
+      res.json(results);
+    }
+  });
+});
+
 // GET 1 LOGGED USER
 app.get('/76/users/:mail/:pseudo', (req, res) => {
   const { mail, pseudo } = req.params;

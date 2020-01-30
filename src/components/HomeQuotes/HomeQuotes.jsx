@@ -9,13 +9,15 @@ class HomeQuotes extends Component {
     super(props);
     this.state = {
       quotes: [],
-      value: 0
+      value: 0,
+      cardExpanded: false
     };
     this.getTopQuotes = this.getTopQuotes.bind(this);
     this.getRecentQuotes = this.getRecentQuotes.bind(this);
     this.upVote = this.upVote.bind(this);
     this.downVote = this.downVote.bind(this);
     this.deleteQuote = this.deleteQuote.bind(this);
+    this.expandCard = this.expandCard.bind(this);
   }
 
   componentDidMount() {
@@ -60,13 +62,27 @@ class HomeQuotes extends Component {
     }
   }
 
+  expandCard(quoteId) {
+    const { cardExpanded } = this.state;
+    this.setState({
+      cardExpanded: !cardExpanded
+    })
+  }
+
   render() {
-    const { quotes } = this.state;
+    const { quotes, cardExpanded } = this.state;
     const { adminLogged } = this.props
     return (
       <>
         <TopTab getTopQuotes={this.getTopQuotes} getRecentQuotes={this.getRecentQuotes} />
-        <HomeQuotesList quotes={quotes} upVote={this.upVote} downVote={this.downVote} delete={this.deleteQuote} adminLogged={adminLogged} />
+        <HomeQuotesList
+          quotes={quotes}
+          upVote={this.upVote}
+          downVote={this.downVote}
+          delete={this.deleteQuote}
+          adminLogged={adminLogged}
+          expandCard={this.expandCard}
+          cardExpanded={cardExpanded} />
       </>
     );
   }

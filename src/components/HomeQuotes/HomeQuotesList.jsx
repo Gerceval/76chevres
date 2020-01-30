@@ -1,13 +1,20 @@
 import React from 'react';
-import { Card, CardMedia, CardContent, Typography, Fab, Avatar, Button } from '@material-ui/core';
-import { ThumbUp, ThumbDown } from '@material-ui/icons';
+import { Card, CardMedia, CardContent, Typography, Fab, Avatar, Button, CardActions, IconButton, Collapse } from '@material-ui/core';
+import { ThumbUp, ThumbDown, MoreHoriz } from '@material-ui/icons';
+
 import './quotes.css';
 
 const HomeQuotesList = props => {
   const { adminLogged } = props;
   return props.quotes.map(quote => {
+    const date = quote.creation_date
+      .substring(0, 10)
+      .split('-')
+      .reverse()
+      .join(' / ');
+
     return (
-      <Card className="quote-card">
+      <Card key={quote.quoteId} className={`quote-card ${quote.quoteId}`}>
         <CardMedia
           className="quote-image"
           image={quote.url_img}
@@ -39,13 +46,23 @@ const HomeQuotesList = props => {
             {quote.citation}
           </Typography>
         </CardContent>
-        <Typography variant="caption" color="textSecondary" component="p">
-          envoyé par {quote.pseudo}
-        </Typography>
-        {adminLogged &&
-          <Button onClick={() => props.delete(quote.quoteId)} variant="outlined" color="secondary">
-            supprimer
-        </Button>}
+        <CardActions>
+          <IconButton className="quote-expand-on" onClick={() => props.expandCard(quote.quoteId)}>
+            <MoreHoriz />
+          </IconButton>
+        </CardActions>
+        <Collapse in={props.cardExpanded} timeout="auto" unmountOnExit>
+          <CardContent>
+            <Typography variant="caption" color="textSecondary" component="p">
+              créé par {quote.pseudo} le {date}
+            </Typography>
+            {adminLogged &&
+              <Button onClick={() => props.delete(quote.quoteId)} variant="outlined" color="secondary">
+                supprimer
+            </Button>
+            }
+          </CardContent>
+        </Collapse>
       </Card>
     )
   })

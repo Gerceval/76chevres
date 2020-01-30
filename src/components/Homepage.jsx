@@ -82,7 +82,11 @@ class Homepage extends Component {
             path="/profile"
             render={() => (
               <>
-                <Profile handleSignOut={this.handleSignOut} userLogged={userLogged} />
+                <Profile
+                  userId={this.state.user[0].id}
+                  handleSignOut={this.handleSignOut}
+                  userLogged={userLogged}
+                />
               </>
             )}
           />

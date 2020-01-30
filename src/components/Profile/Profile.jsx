@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
 import { Button } from '@material-ui/core';
 import { Redirect } from 'react-router-dom';
-import axios from 'axios';
+import MyQuotes from './MyQuotes';
 
 class Profile extends Component {
   constructor(props) {
     super(props);
-    this.state = { };
+    this.state = {};
   }
 
   render() {
-    const { userLogged } = this.props;
+    const { userLogged, userId } = this.props;
     if (userLogged === false) {
       return <Redirect to="/homepage" />
     }
     return (
-      <Button onClick={this.props.handleSignOut}>Se Déconnecter</Button>
+      <>
+        <MyQuotes userId={userId} />
+        <Button onClick={this.props.handleSignOut}>Se Déconnecter</Button>
+      </>
     );
   }
 }
