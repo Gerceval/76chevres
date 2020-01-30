@@ -11,13 +11,6 @@ class Profile extends Component {
     this.disconnect = this.disconnect.bind(this);
   }
 
-  // getUser() {
-  //   const pseudo = localStorage.getItem('pseudo');
-  //   const mail = localStorage.getItem('mail');
-  //   axios
-  //     .get(`/76/users/${mail}/${pseudo}`)
-  // }
-
   disconnect() {
     this.props.handleConnection()
   }

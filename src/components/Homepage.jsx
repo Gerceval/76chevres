@@ -5,22 +5,22 @@ import AddQuoteButton from './AddQuote/AddQuoteButton';
 import AddQuote from './AddQuote/AddQuote';
 import './homepage.css';
 import BottomNavbar from './Navbar/BottomNavbar';
-import CreateProfile from './CreateProfile/CreateProfile';
-import SignIn from './CreateProfile/SignIn';
+import SignUp from './Profile/Logg/SignUp';
+import SignIn from './Profile/Logg/SignIn';
 import Profile from './Profile/Profile';
-import { is } from '@babel/types';
 
 class Homepage extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      isConnected: false      
+    this.state = {
+      isConnected: false,
+      adminLogged: false
     };
     this.handleConnection = this.handleConnection.bind(this);
   }
 
   handleConnection() {
-    const { isConnected } = this.state;
+    const { isConnected, adminLogged } = this.state;
     this.setState({
       isConnected: !isConnected
     })
@@ -54,18 +54,16 @@ class Homepage extends Component {
             )}
           />
           <Route
-            path="/login"
+            path="/signin"
             render={() => (
-              <>
-                <SignIn handleConnection={this.handleConnection} isConnected={isConnected} />
-              </>
+              <SignIn handleConnection={this.handleConnection} isConnected={isConnected} />
             )}
           />
           <Route
-            path="/createprofile"
+            path="/signup"
             render={() => (
               <>
-                <CreateProfile />
+                <SignUp />
               </>
             )}
           />

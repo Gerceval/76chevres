@@ -22,7 +22,7 @@ class BottomNavbar extends Component {
       )
     } else if (isConnected === false) {
       goProfile = (
-        <NavLink to="/login">
+        <NavLink to="/signin">
           <AccountCircleRoundedIcon color="primary" fontSize="large" />
         </NavLink>
       )

@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import HomeQuotesList from './HomeQuotesList';
-import Paper from '@material-ui/core/Paper';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import PhoneIcon from '@material-ui/icons/Phone';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import PersonPinIcon from '@material-ui/icons/PersonPin';
-import AccessTimeIcon from '@material-ui/icons/AccessTime';
-import TrendingUpIcon from '@material-ui/icons/TrendingUp';
+import TopTab from '../Navbar/TopTab';
 
 
 class HomeQuotes extends Component {
@@ -18,63 +11,54 @@ class HomeQuotes extends Component {
       quotes: [],
       value: 0
     };
-    this.getQuotes = this.getQuotes.bind(this);
+    this.getTopQuotes = this.getTopQuotes.bind(this);
+    this.getRecentQuotes = this.getRecentQuotes.bind(this);
     this.upVote = this.upVote.bind(this);
     this.downVote = this.downVote.bind(this);
     this.deleteQuote = this.deleteQuote.bind(this);
-    this.handleTabChange = this.handleTabChange.bind(this);
   }
 
   componentDidMount() {
-    this.getQuotes();
+    this.getTopQuotes();
   }
 
-  getQuotes() {
+  getTopQuotes() {
     axios
-      .get('/76/quotes')
+      .get('/76/quotes/top')
       .then(res => res.data)
       .then(data => this.setState({ quotes: data }));
+  }
+
+  getRecentQuotes() {
+    axios
+      .get('/76/quotes/recent')
+      .then(res => res.data)
+      .then(data => this.setState({ quotes: data }))
   }
 
   upVote(quoteId) {
     axios
       .put(`/76/upvote/quote/${quoteId}/`)
-      .then(this.getQuotes())
+      .then(this.getTopQuotes())
   }
 
   downVote(quoteId) {
     axios
       .put(`/76/downvote/quote/${quoteId}/`)
-      .then(this.getQuotes())
+      .then(this.getTopQuotes())
   }
 
   deleteQuote(quoteId) {
     axios
       .delete(`76/quote/${quoteId}`)
-      .then(this.getQuotes())
+      .then(this.getTopQuotes())
   }
 
-  handleTabChange(event, newValue) {
-    this.setState({ value: newValue })
-  };
-
   render() {
-    const { quotes, value } = this.state;
+    const { quotes } = this.state;
     return (
       <>
-        <Paper square>
-          <Tabs
-            value={value}
-            onChange={this.handleTabChange}
-            variant="fullWidth"
-            indicatorColor="primary"
-            textColor="primary"
-            aria-label="icon tabs example"
-          >
-            <Tab icon={<TrendingUpIcon />} aria-label="phone" />
-            <Tab icon={<AccessTimeIcon />} aria-label="favorite" />
-          </Tabs>
-        </Paper>
+        <TopTab getTopQuotes={this.getTopQuotes} getRecentQuotes={this.getRecentQuotes} />
         <HomeQuotesList quotes={quotes} upVote={this.upVote} downVote={this.downVote} delete={this.deleteQuote} />
       </>
     );

@@ -12,9 +12,21 @@ app.use(
   })
 );
 
-// GET ALL QUOTES
-app.get('/76/quotes', (req, res) => {
+// GET TOP QUOTES
+app.get('/76/quotes/top', (req, res) => {
   connection.query('SELECT q.*, q.id AS quoteId, u.* from quote AS q JOIN user AS u on u.id = q.id_uploader ORDER BY q.like_count DESC', (err, results) => {
+    if (err) {
+      res.status(500).send('Error');
+      console.log(err)
+    } else {
+      res.json(results);
+    }
+  });
+});
+
+// GET RECENT QUOTES
+app.get('/76/quotes/recent', (req, res) => {
+  connection.query('SELECT q.*, q.id AS quoteId, u.* from quote AS q JOIN user AS u on u.id = q.id_uploader ORDER BY q.creation_date DESC', (err, results) => {
     if (err) {
       res.status(500).send('Error');
       console.log(err)
@@ -32,7 +44,7 @@ app.get('/76/users/:mail/:pseudo', (req, res) => {
       res.status(500).send('Error');
       console.log(err)
     } else {
-      res.json(results);
+      res.json(results).status(200);
     }
   });
 });
@@ -86,7 +98,7 @@ app.put('/76/downvote/quote/:id', (req, res) => {
 });
 
 // CREATE USER
-app.post('/76/user/create', (req, res) => {
+app.post('/76/user', (req, res) => {
   const formData = req.body;
   connection.query('INSERT INTO user SET ?', formData, err => {
     if (err) {

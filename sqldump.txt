@@ -18,6 +18,7 @@ CREATE TABLE quote (
   like_count INT DEFAULT 0,
   image LONGBLOB NULL,
   url_img VARCHAR(5000) NULL,
+  creation_date DATETIME DEFAULT NOW(),
   id_uploader INT NOT NULL,
   FOREIGN KEY (id_uploader) REFERENCES user(id)
 );
