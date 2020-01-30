@@ -37,29 +37,36 @@ class HomeQuotes extends Component {
   }
 
   upVote(quoteId) {
-    axios
-      .put(`/76/upvote/quote/${quoteId}/`)
-      .then(this.getTopQuotes())
+    if (this.props.userLogged || this.props.adminLogged) {
+      axios
+        .put(`/76/upvote/quote/${quoteId}/`)
+        .then(this.getTopQuotes())
+    }
   }
 
   downVote(quoteId) {
-    axios
-      .put(`/76/downvote/quote/${quoteId}/`)
-      .then(this.getTopQuotes())
+    if (this.props.userLogged || this.props.adminLogged) {
+      axios
+        .put(`/76/downvote/quote/${quoteId}/`)
+        .then(this.getTopQuotes())
+    }
   }
 
   deleteQuote(quoteId) {
-    axios
-      .delete(`76/quote/${quoteId}`)
-      .then(this.getTopQuotes())
+    if (this.props.adminLogged) {
+      axios
+        .delete(`76/quote/${quoteId}`)
+        .then(this.getTopQuotes())
+    }
   }
 
   render() {
     const { quotes } = this.state;
+    const { adminLogged } = this.props
     return (
       <>
         <TopTab getTopQuotes={this.getTopQuotes} getRecentQuotes={this.getRecentQuotes} />
-        <HomeQuotesList quotes={quotes} upVote={this.upVote} downVote={this.downVote} delete={this.deleteQuote} />
+        <HomeQuotesList quotes={quotes} upVote={this.upVote} downVote={this.downVote} delete={this.deleteQuote} adminLogged={adminLogged} />
       </>
     );
   }

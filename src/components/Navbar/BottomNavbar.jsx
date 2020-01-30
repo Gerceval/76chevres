@@ -12,17 +12,23 @@ class BottomNavbar extends Component {
 
   render() {
     let goProfile;
-    const { isConnected } = this.props;
+    const { userLogged, adminLogged } = this.props;
 
-    if (isConnected === true) {
+    if (userLogged === true) {
       goProfile = (
         <NavLink to="/profile">
           <AccountCircleRoundedIcon color="primary" fontSize="large" />
         </NavLink>
       )
-    } else if (isConnected === false) {
+    } else if (userLogged === false && adminLogged === false) {
       goProfile = (
         <NavLink to="/signin">
+          <AccountCircleRoundedIcon color="primary" fontSize="large" />
+        </NavLink>
+      )
+    } else if (adminLogged === true) {
+      goProfile = (
+        <NavLink to="/admin">
           <AccountCircleRoundedIcon color="primary" fontSize="large" />
         </NavLink>
       )

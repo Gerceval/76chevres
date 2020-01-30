@@ -32,14 +32,23 @@ class AddQuote extends Component {
 
   render() {
     const { personnage, citation, url_img } = this.state;
+    const { adminLogged, userLogged } = this.props;
     return (
-      <div className="render-addquote-page" >
-        <TextField label="Personnage" name="personnage" value={personnage} onChange={this.handleInputChange} variant="outlined" />
-        <TextField label="Citation" name="citation" value={citation} onChange={this.handleInputChange} variant="outlined" multiline rowsMax="6" />
-        <TextField label="image url" name="url_img" value={url_img} onChange={this.handleInputChange} variant="outlined" multiline rowsMax="6" />
-        <Button onClick={this.handleSubmit}>Envoyer</Button>
+      <div>
+        {userLogged === true || adminLogged === true ?
+          (
+            <div className="render-addquote-page" >
+              <TextField label="Personnage" name="personnage" value={personnage} onChange={this.handleInputChange} variant="outlined" />
+              <TextField label="Citation" name="citation" value={citation} onChange={this.handleInputChange} variant="outlined" multiline rowsMax="6" />
+              <TextField label="image url" name="url_img" value={url_img} onChange={this.handleInputChange} variant="outlined" multiline rowsMax="6" />
+              <Button onClick={this.handleSubmit}>Envoyer</Button>
+            </div>
+          )
+          :
+          <p>Vous devez être connecté pour pouvoir ajouter une citation</p>
+        }
       </div>
-    );
+    )
   }
 }
 

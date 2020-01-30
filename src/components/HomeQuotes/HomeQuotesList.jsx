@@ -4,6 +4,7 @@ import { ThumbUp, ThumbDown } from '@material-ui/icons';
 import './quotes.css';
 
 const HomeQuotesList = props => {
+  const { adminLogged } = props;
   return props.quotes.map(quote => {
     return (
       <Card className="quote-card">
@@ -41,9 +42,10 @@ const HomeQuotesList = props => {
         <Typography variant="caption" color="textSecondary" component="p">
           envoyé par {quote.pseudo}
         </Typography>
-        <Button onClick={() => props.delete(quote.quoteId)} variant="outlined" color="secondary">
-          supprimer
-        </Button>
+        {adminLogged &&
+          <Button onClick={() => props.delete(quote.quoteId)} variant="outlined" color="secondary">
+            supprimer
+        </Button>}
       </Card>
     )
   })

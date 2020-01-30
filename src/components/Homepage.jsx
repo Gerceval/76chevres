@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import HomeQuotes from './HomeQuotes/HomeQuotes';
 import AddQuoteButton from './AddQuote/AddQuoteButton';
 import AddQuote from './AddQuote/AddQuote';
@@ -8,34 +8,41 @@ import BottomNavbar from './Navbar/BottomNavbar';
 import SignUp from './Profile/Logg/SignUp';
 import SignIn from './Profile/Logg/SignIn';
 import Profile from './Profile/Profile';
+import Admin from './Profile/Admin';
 
 class Homepage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isConnected: false,
+      userLogged: false,
       adminLogged: false
     };
-    this.handleConnection = this.handleConnection.bind(this);
+    this.handleSignIn = this.handleSignIn.bind(this);
+    this.handleSignOut = this.handleSignOut.bind(this);
   }
 
-  handleConnection(user) {
-    const { isConnected } = this.state;
+  handleSignIn(user) {
     this.setState({
-      isConnected: !isConnected,
+      userLogged: true,
       user
     })
     if (user[0].profil_type === 'admin') {
-      this.setState({ adminLogged: true, isConnected: false })
+      this.setState({ adminLogged: true, userLogged: false })
     }
   }
 
+  handleSignOut() {
+    this.setState({
+      user: null, userLogged: false, adminLogged: false
+    })
+  }
+
   render() {
-    const { isConnected } = this.state;
+    const { userLogged, adminLogged } = this.state;
     return (
       <div className="render-homepage">
         <div className="homepage-bottom-navbar">
-          <BottomNavbar isConnected={isConnected} />
+          <BottomNavbar userLogged={userLogged} adminLogged={adminLogged} />
         </div>
         <Switch>
           <Route
@@ -45,7 +52,7 @@ class Homepage extends Component {
                 <div className="homepage-addquote-button">
                   <AddQuoteButton />
                 </div>
-                <HomeQuotes />
+                <HomeQuotes adminLogged={adminLogged} userLogged={userLogged} />
               </div>
             )}
           />
@@ -53,14 +60,14 @@ class Homepage extends Component {
             path="/addquote"
             render={() => (
               <>
-                <AddQuote />
+                <AddQuote adminLogged={adminLogged} userLogged={userLogged} />
               </>
             )}
           />
           <Route
             path="/signin"
             render={() => (
-              <SignIn handleConnection={this.handleConnection} isConnected={isConnected} />
+              <SignIn handleSignIn={this.handleSignIn} userLogged={userLogged} />
             )}
           />
           <Route
@@ -75,7 +82,15 @@ class Homepage extends Component {
             path="/profile"
             render={() => (
               <>
-                <Profile handleConnection={this.handleConnection} isConnected={isConnected} />
+                <Profile handleSignOut={this.handleSignOut} userLogged={userLogged} />
+              </>
+            )}
+          />
+          <Route
+            path="/admin"
+            render={() => (
+              <>
+                <Admin adminLogged={adminLogged} handleSignOut={this.handleSignOut} />
               </>
             )}
           />

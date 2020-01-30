@@ -26,13 +26,13 @@ class SignIn extends Component {
       .get(`/76/users/${mail}/${pseudo}`)
       .then(res =>  res.data)
       .then(data => this.setState({ user: data }))
-      .then(() => this.props.handleConnection(this.state.user))
+      .then(() => this.props.handleSignIn(this.state.user))
   }
 
   render() {
     const { pseudo, mail } = this.state;
-    const { isConnected } = this.props;
-    if (isConnected) {
+    const { userLogged } = this.props;
+    if (userLogged) {
       return <Redirect to="/homepage" />
     }
     return (

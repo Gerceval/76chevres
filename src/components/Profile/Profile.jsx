@@ -6,22 +6,16 @@ import axios from 'axios';
 class Profile extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
-     };
-    this.disconnect = this.disconnect.bind(this);
-  }
-
-  disconnect() {
-    this.props.handleConnection()
+    this.state = { };
   }
 
   render() {
-    const { isConnected } = this.props;
-    if (isConnected === false) {
+    const { userLogged } = this.props;
+    if (userLogged === false) {
       return <Redirect to="/homepage" />
     }
     return (
-      <Button onClick={this.disconnect}>Se Déconnecter</Button>
+      <Button onClick={this.props.handleSignOut}>Se Déconnecter</Button>
     );
   }
 }
