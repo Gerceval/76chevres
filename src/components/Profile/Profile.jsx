@@ -10,16 +10,16 @@ class Profile extends Component {
   }
 
   render() {
-    const { userLogged, userId, user } = this.props;
+    const { userLogged, userId, user, nightTheme } = this.props;
     if (userLogged === false) {
       return <Redirect to="/homepage" />
     }
     return (
       <>
       <p className="userGreeting">Bonjour {user.pseudo}</p>
-        <MyQuotes userId={userId} userLogged={userLogged} />
+        <MyQuotes userId={userId} userLogged={userLogged} nightTheme={nightTheme} />
         <div className="profile-signout">
-          <Button onClick={this.props.handleSignOut} variant="outlined" color="primary">Se Déconnecter</Button>
+          <Button onClick={this.props.handleSignOut} variant="outlined" color="primary">Me Déconnecter</Button>
         </div>
       </>
     );

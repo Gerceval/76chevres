@@ -50,7 +50,7 @@ class MyQuotes extends Component {
 
   render() {
     const { quotes, isEditing, openedItem } = this.state;
-    const { userLogged } = this.props;
+    const { userLogged, nightTheme } = this.props;
     return (
       <div>
         <div className="myquotes-title">
@@ -69,6 +69,7 @@ class MyQuotes extends Component {
               userLogged={userLogged}
               openedItem={openedItem}
               remover={this.remover}
+              nightTheme={nightTheme}
             />
             :
             <p>0 quotes</p>}

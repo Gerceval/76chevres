@@ -18,3 +18,12 @@ html {
   background: radial-gradient(circle, rgba(26,95,255,0.14467793953518904) 0%, rgba(255,255,255,0.6) 100%);
   height: 100%;
 }
+
+.night {
+  background-color: rgb(100, 100, 100);
+  height: 100vh;
+}
+
+.nighttheme {
+  background-color: rgb(67, 73, 104) !important;
+}

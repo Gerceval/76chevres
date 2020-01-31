@@ -49,7 +49,7 @@ class SignIn extends Component {
           <TextField label="Mail" name="mail" value={mail} onChange={this.handleInputChange} variant="outlined" />
         </div>
         <div className="signin-submit">
-          <Button onClick={this.handleSubmit} variant="outlined" color="primary">Se Connecter</Button>
+          <Button onClick={this.handleSubmit} variant="outlined" color="primary">Me Connecter</Button>
         </div>
         <div className="signin-go-signup">
           <Typography variant="body1" color="textSecondary" component="p">

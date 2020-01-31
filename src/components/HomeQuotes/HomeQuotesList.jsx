@@ -5,7 +5,7 @@ import { ThumbUp, ThumbDown, MoreHoriz } from '@material-ui/icons';
 import './quotes.css';
 
 const HomeQuotesList = props => {
-  const { adminLogged, openedItem } = props;
+  const { adminLogged, openedItem, nightTheme } = props;
   return props.quotes.map(quote => {
     const date = quote.creation_date
       .substring(0, 10)
@@ -39,7 +39,7 @@ const HomeQuotesList = props => {
               </div>
             </div>
           </CardMedia>
-          <CardContent>
+          <CardContent className={nightTheme ? "nighttheme" : null}>
             <Typography gutterBottom variant="h5" component="h2">
               {quote.personnage}
             </Typography>
@@ -47,7 +47,7 @@ const HomeQuotesList = props => {
               {quote.citation}
             </Typography>
           </CardContent>
-          <CardActions>
+          <CardActions className={nightTheme ? "nighttheme" : null}>
             <IconButton className="quote-expand-on" onClick={() => props.expandCard(quote.quoteId, openedItem)}>
               <MoreHoriz />
             </IconButton>

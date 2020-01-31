@@ -18,20 +18,26 @@ class Homepage extends Component {
       userLogged: false,
       adminLogged: false,
       error: false,
-      user: []
+      user: [],
+      nightTheme: false
     };
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignOut = this.handleSignOut.bind(this);
     this.handleErrorPrivilege = this.handleErrorPrivilege.bind(this);
+    this.handleNightTheme = this.handleNightTheme.bind(this);
   }
 
   handleSignIn(user) {
-    this.setState({
-      userLogged: true,
-      user
-    })
-    if (user[0].profil_type === 'admin') {
-      this.setState({ adminLogged: true, userLogged: false })
+    if (user[0] === undefined) {
+      this.handleErrorPrivilege();
+    } else {
+      this.setState({
+        userLogged: true,
+        user
+      })
+      if (user[0].profil_type === 'admin') {
+        this.setState({ adminLogged: true, userLogged: false })
+      }
     }
   }
 
@@ -48,26 +54,30 @@ class Homepage extends Component {
     }, 3500)
   }
 
+  handleNightTheme() {
+    this.setState({ nightTheme: !this.state.nightTheme })
+  }
+
   render() {
-    const { userLogged, adminLogged, user, error } = this.state;
+    const { userLogged, adminLogged, user, error, nightTheme } = this.state;
     return (
-      <div className="render-homepage">
+      <div className={nightTheme ? 'render-homepage night' : 'render-homepage'}>
         {error &&
           <div className="homepage-error-privilege">
             <Alert severity="error">Veuillez vous connecter</Alert>
           </div>}
         <div className="homepage-bottom-navbar">
-          <BottomNavbar userLogged={userLogged} adminLogged={adminLogged} />
+          <BottomNavbar userLogged={userLogged} adminLogged={adminLogged} handleNightTheme={this.handleNightTheme} nightTheme={nightTheme} />
         </div>
         <Switch>
           <Route
             exact path="/homepage"
             render={() => (
-              <div className="homepage">
+              <div className={nightTheme ? "homepage nighttheme" : "homepage"}>
                 <div className="homepage-addquote-button">
                   <AddQuoteButton />
                 </div>
-                <HomeQuotes adminLogged={adminLogged} userLogged={userLogged} handleErrorPrivilege={this.handleErrorPrivilege} />
+                <HomeQuotes adminLogged={adminLogged} userLogged={userLogged} handleErrorPrivilege={this.handleErrorPrivilege} nightTheme={nightTheme} />
               </div>
             )}
           />
@@ -103,6 +113,7 @@ class Homepage extends Component {
                     handleSignOut={this.handleSignOut}
                     userLogged={userLogged}
                     user={this.state.user[0]}
+                    nightTheme={nightTheme}
                   />
                   :
                   <Redirect to="homepage" />

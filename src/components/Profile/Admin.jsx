@@ -9,7 +9,7 @@ const Admin = props => {
       {adminLogged ?
         <>
           <h1>Super Espace Admin</h1>
-          <Button onClick={handleSignOut}>Se déconnecter</Button>
+          <Button onClick={handleSignOut} variant="outlined" color="primary">Me déconnecter</Button>
         </>
         :
         <Redirect to="/homepage" />

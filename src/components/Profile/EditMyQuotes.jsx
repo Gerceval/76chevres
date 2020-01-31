@@ -1,12 +1,10 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { Card, CardMedia, CardContent, Typography, Fab, Avatar, Button, CardActions, IconButton, Collapse } from '@material-ui/core';
-import { ThumbUp, ThumbDown, MoreHoriz } from '@material-ui/icons';
+import { Card, CardMedia, CardContent, Typography, Button} from '@material-ui/core';
 import AddQuote from '../AddQuote/AddQuote';
 import './profile.css';
 
 const EditMyQuotes = props => {
-  const { isEditing, userLogged, openedItem, remover } = props;
+  const { isEditing, userLogged, openedItem, remover, nightTheme } = props;
   return props.quotes.map(quote => {
     const date = quote.creation_date
       .substring(0, 10)
@@ -15,7 +13,7 @@ const EditMyQuotes = props => {
       .join(' / ');
 
     return (
-      <div className="editmyquotes-items">
+      <div className={nightTheme ? "editmyquotes-items nighttheme" : "editmyquotes-items"}>
         <Card key={quote.quoteId}>
           <div className={openedItem === quote.quoteId ? `card-structure ${isEditing}` : 'card-structure'}>
             <CardMedia
@@ -23,7 +21,7 @@ const EditMyQuotes = props => {
               image={quote.url_img}
               title="Contemplative Reptile"
             />
-            <CardContent>
+            <CardContent className={nightTheme ? "nighttheme" : null}>
               <Typography gutterBottom variant="h5" component="h2">
                 {quote.personnage}
               </Typography>

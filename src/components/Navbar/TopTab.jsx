@@ -20,9 +20,9 @@ class TopTab extends Component {
 
   render() {
     const { value } = this.state;
-    const { getTopQuotes, getRecentQuotes } = this.props;
+    const { getTopQuotes, getRecentQuotes, nightTheme } = this.props;
     return (
-      <Paper square>
+      <Paper square className={nightTheme ? "nighttheme" : null}>
         <Tabs
           value={value}
           onChange={this.handleTabChange}

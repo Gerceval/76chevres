@@ -89,10 +89,10 @@ class HomeQuotes extends Component {
 
   render() {
     const { quotes, cardExpanded, openedItem } = this.state;
-    const { adminLogged } = this.props
+    const { adminLogged, nightTheme } = this.props
     return (
       <>
-        <TopTab getTopQuotes={this.getTopQuotes} getRecentQuotes={this.getRecentQuotes} />
+        <TopTab getTopQuotes={this.getTopQuotes} getRecentQuotes={this.getRecentQuotes} nightTheme={nightTheme} />
         <HomeQuotesList
           quotes={quotes}
           upVote={this.upVote}
@@ -102,6 +102,7 @@ class HomeQuotes extends Component {
           expandCard={this.expandCard}
           cardExpanded={cardExpanded}
           openedItem={openedItem}
+          nightTheme={nightTheme}
         />
       </>
     );

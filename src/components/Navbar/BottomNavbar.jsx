@@ -12,7 +12,7 @@ class BottomNavbar extends Component {
 
   render() {
     let goProfile;
-    const { userLogged, adminLogged } = this.props;
+    const { userLogged, adminLogged, handleNightTheme, nightTheme } = this.props;
 
     if (userLogged === true) {
       goProfile = (
@@ -35,11 +35,11 @@ class BottomNavbar extends Component {
     }
 
     return (
-      <div className="bottom-navbar">
-        <div className="bottom-navbar-useless">
-          <NavLink to="/homepage">
-            <VisibilityRoundedIcon color="primary" fontSize="large" />
-          </NavLink>
+      <div className={nightTheme ? "bottom-navbar nighttheme" : "bottom-navbar"}>
+        <div className="bottom-navbar-nighttheme">
+        <NavLink to="/homepage">
+          <VisibilityRoundedIcon clickable onClick={() => handleNightTheme()} color="primary" fontSize="large" />
+        </NavLink>
         </div>
         <div className="bottom-navbar-homepage">
           <NavLink to="/homepage">
