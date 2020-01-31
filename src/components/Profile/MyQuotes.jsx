@@ -7,11 +7,13 @@ class MyQuotes extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isEditing: false
+      isEditing: false,
+      openedItem: null
     };
     this.getMyQuotes = this.getMyQuotes.bind(this);
     this.deleteQuote = this.deleteQuote.bind(this);
     this.editQuote = this.editQuote.bind(this);
+    this.remover = this.remover.bind(this);
   }
 
   componentDidMount() {
@@ -32,12 +34,19 @@ class MyQuotes extends Component {
       .then(this.getMyQuotes())
   }
 
-  editQuote() {
-    this.setState({ isEditing: 'isEditing' })
+  editQuote(quoteId) {
+    this.setState({ 
+      isEditing: 'isEditing', 
+      openedItem: quoteId })
+  }
+
+  remover() {
+    this.setState({ isEditing: false, openedItem: null })
+    this.getMyQuotes();
   }
 
   render() {
-    const { quotes, isEditing } = this.state;
+    const { quotes, isEditing, openedItem } = this.state;
     const { userLogged } = this.props;
     return (
       <div>
@@ -50,6 +59,8 @@ class MyQuotes extends Component {
               isEditing={isEditing}
               editQuote={this.editQuote}
               userLogged={userLogged}
+              openedItem={openedItem}
+              remover={this.remover}
             />
             :
             <p>0 quotes</p>}

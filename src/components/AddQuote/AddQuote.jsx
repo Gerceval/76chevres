@@ -46,18 +46,19 @@ class AddQuote extends Component {
 
   handleEdit() {
     const { personnage, citation, url_img } = this.state;
-    const { quoteId } = this.props;
+    const { quoteId, remover } = this.props;
     axios
       .put(`/76/quote/edit/${quoteId}`, {
         personnage,
         citation,
         url_img
       })
+      .then(remover())
   }
 
   render() {
     const { personnage, citation, url_img } = this.state;
-    const { adminLogged, userLogged, isEditing, quoteId } = this.props;
+    const { adminLogged, userLogged, isEditing, quoteId, itemToEdit } = this.props;
     return (
       <div>
         {userLogged === true || adminLogged === true ?

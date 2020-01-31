@@ -83,7 +83,7 @@ class Homepage extends Component {
             path="/profile"
             render={() => (
               <div>
-                {this.state.user ?
+                {this.state.user[0] !== undefined && this.state.user[0] !== null ?
                   <Profile
                     userId={this.state.user[0].id}
                     handleSignOut={this.handleSignOut}

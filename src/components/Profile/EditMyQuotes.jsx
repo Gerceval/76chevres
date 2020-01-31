@@ -5,8 +5,8 @@ import { ThumbUp, ThumbDown, MoreHoriz } from '@material-ui/icons';
 import AddQuote from '../AddQuote/AddQuote';
 import './profile.css';
 
-const HomeQuotesList = props => {
-  const { isEditing, userLogged } = props;
+const EditMyQuotes = props => {
+  const { isEditing, userLogged, openedItem, remover } = props;
   return props.quotes.map(quote => {
     const date = quote.creation_date
       .substring(0, 10)
@@ -17,7 +17,7 @@ const HomeQuotesList = props => {
     return (
       <div className="editmyquotes-items">
         <Card key={quote.quoteId}>
-          <div className={`card-structure ${isEditing}`}>
+          <div className={openedItem === quote.quoteId ? `card-structure ${isEditing}` : 'card-structure'}>
             <CardMedia
               className="quote-image"
               image={quote.url_img}
@@ -43,7 +43,7 @@ const HomeQuotesList = props => {
               </div>
             </CardContent>
           </div>
-          {isEditing &&
+          {openedItem === quote.quoteId ?
             <div className="editmyquotes-addquote-editing">
               <AddQuote
                 citation={quote.citation}
@@ -52,8 +52,11 @@ const HomeQuotesList = props => {
                 userLogged={userLogged}
                 isEditing={isEditing}
                 quoteId={quote.quoteId}
+                openedItem={openedItem}
+                remover={remover}
               />
             </div>
+            : null
           }
         </Card>
       </div>
@@ -61,4 +64,4 @@ const HomeQuotesList = props => {
   })
 }
 
-export default HomeQuotesList;
+export default EditMyQuotes;
