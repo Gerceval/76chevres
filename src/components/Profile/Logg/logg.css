@@ -16,6 +16,10 @@
   grid-area: 4 / 2 / 4 / 2;
 }
 
+.signup-error-message {
+  grid-area: 5 / 2 / 5 / 2;
+}
+
 /* ----------- SIGN IN ----------- */
 
 .render-signin {

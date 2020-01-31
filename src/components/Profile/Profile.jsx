@@ -17,7 +17,7 @@ class Profile extends Component {
     return (
       <>
         <MyQuotes userId={userId} userLogged={userLogged} />
-        <Button onClick={this.props.handleSignOut}>Se Déconnecter</Button>
+        <Button onClick={this.props.handleSignOut} variant="outlined" color="primary">Se Déconnecter</Button>
       </>
     );
   }

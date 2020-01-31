@@ -1,12 +1,46 @@
-.addquote-modal {
-  width: 80vw;
-  height: 80vh;
-  position: absolute;
-  left: 10vw;
-  top: 8vh;
-  background-color: rgb(255, 255, 255);
-  border-radius: 10px;
+.render-addquote-page {
   display: grid;
-  grid-template-columns: 20px auto 20px;
-  grid-template-rows: 20px auto 20px auto 20px auto 20px;
+  grid-template-rows: 20vh 10vh 10vh 20vh 20vh;
+  grid-template-columns: 10vw 80vw 10vw;
+}
+
+.addquote-personnage {
+  grid-area: 2 / 2 / 2 / 2;
+}
+
+.addquote-citation {
+  grid-area: 3 / 2 / 3 / 2;
+}
+
+.addquote-url_image {
+  grid-area: 4 / 2 / 4 / 2;
+}
+
+.addquote-submit {
+  grid-area: 5 / 2 / 5 / 2;
+}
+
+/* ------ WHEN NOT LOGGED IN ------- */
+
+.addquote-notlogged-p {
+  grid-area: 2 / 2 / 2 / 2;
+}
+
+.addquote-notlogged-gosignin {
+  grid-area: 4 / 2 / 4 / 2;
+}
+
+/* ------ WHEN EDITING ------- */
+
+
+.render-addquote-page-editing {
+  display: grid;
+  grid-template-rows: 7vh 10vh 10vh 20vh 20vh;
+  grid-template-columns: 5vw 60vw 5vw;
+}
+
+.addquote-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

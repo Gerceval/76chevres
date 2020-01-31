@@ -21,3 +21,15 @@
 .quote-count {
   background-color: rgb(0, 233, 0) !important;
 }
+
+.MuiCardActions-spacing {
+  padding-top: 0 !important;
+}
+
+.MuiCardContent-root {
+  padding-bottom: 0 !important;
+}
+
+.MuiTypography-h5 {
+  margin-top: 10px !important;
+}

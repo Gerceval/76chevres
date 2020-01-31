@@ -6,9 +6,9 @@ import './profile.css';
 class MyQuotes extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       isEditing: false
-     };
+    };
     this.getMyQuotes = this.getMyQuotes.bind(this);
     this.deleteQuote = this.deleteQuote.bind(this);
     this.editQuote = this.editQuote.bind(this);
@@ -43,7 +43,16 @@ class MyQuotes extends Component {
       <div>
         <h2>Editer mes quotes</h2>
         <div className="profile-editmyquotes">
-          {quotes ? <EditMyQuotes quotes={quotes} delete={this.deleteQuote} isEditing={isEditing} editQuote={this.editQuote} userLogged={userLogged} /> : <p>0 quotes</p>}
+          {quotes ?
+            <EditMyQuotes
+              quotes={quotes}
+              delete={this.deleteQuote}
+              isEditing={isEditing}
+              editQuote={this.editQuote}
+              userLogged={userLogged}
+            />
+            :
+            <p>0 quotes</p>}
         </div>
       </div>
     )

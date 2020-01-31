@@ -10,7 +10,8 @@ class HomeQuotes extends Component {
     this.state = {
       quotes: [],
       value: 0,
-      cardExpanded: false
+      cardExpanded: false,
+      openedItem: null
     };
     this.getTopQuotes = this.getTopQuotes.bind(this);
     this.getRecentQuotes = this.getRecentQuotes.bind(this);
@@ -62,15 +63,16 @@ class HomeQuotes extends Component {
     }
   }
 
-  expandCard(e, quoteId) {
+  expandCard(quoteId, openedItem) {
     const { cardExpanded } = this.state;
     this.setState({
-      cardExpanded: !cardExpanded
+      cardExpanded: !cardExpanded,
+      openedItem: quoteId
     })
   }
 
   render() {
-    const { quotes, cardExpanded } = this.state;
+    const { quotes, cardExpanded, openedItem } = this.state;
     const { adminLogged } = this.props
     return (
       <>
@@ -82,7 +84,9 @@ class HomeQuotes extends Component {
           delete={this.deleteQuote}
           adminLogged={adminLogged}
           expandCard={this.expandCard}
-          cardExpanded={cardExpanded} />
+          cardExpanded={cardExpanded} 
+          openedItem={openedItem}
+          />
       </>
     );
   }

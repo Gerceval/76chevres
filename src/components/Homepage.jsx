@@ -15,7 +15,8 @@ class Homepage extends Component {
     super(props);
     this.state = {
       userLogged: false,
-      adminLogged: false
+      adminLogged: false,
+      user: []
     };
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignOut = this.handleSignOut.bind(this);
@@ -60,7 +61,7 @@ class Homepage extends Component {
             path="/addquote"
             render={() => (
               <>
-                <AddQuote adminLogged={adminLogged} userLogged={userLogged} />
+                <AddQuote adminLogged={adminLogged} userLogged={userLogged} user={this.state.user[0]} />
               </>
             )}
           />

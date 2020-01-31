@@ -53,13 +53,17 @@ class SignUp extends Component {
         <div className="signup-pseudo">
           <TextField label="Pseudo" name="pseudo" value={pseudo} onChange={this.handleInputChange} variant="outlined" />
         </div>
-       <div className="signup-mail">
+        <div className="signup-mail">
           <TextField label="Mail" name="mail" value={mail} onChange={this.handleInputChange} variant="outlined" />
         </div>
         <div className="signup-submit">
           <Button onClick={this.handleSubmit} variant="outlined" color="primary">Créer mon compte</Button>
         </div>
-        {errorOccured && <Alert severity="error">This is an error alert — check it out!</Alert>}
+        {errorOccured &&
+          <div className="signup-error-message">
+            <Alert severity="error">Une erreur est survenue</Alert>
+          </div>
+        }
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { TextField, Button } from '@material-ui/core/';
+import { NavLink } from 'react-router-dom';
+import { TextField, Button, Typography } from '@material-ui/core/';
 import axios from 'axios';
 
 class AddQuote extends Component {
@@ -19,8 +20,8 @@ class AddQuote extends Component {
     const { personnage, citation, url_img, isEditing } = this.props;
     if (isEditing) {
       this.setState({
-        personnage, 
-        citation, 
+        personnage,
+        citation,
         url_img
       })
     }
@@ -32,13 +33,14 @@ class AddQuote extends Component {
 
   handleSubmit(e) {
     const { personnage, citation, url_img } = this.state;
+    const id_uploader = this.props.user.id
     e.preventDefault();
     axios
       .post('/76/quote', {
         personnage,
         citation,
         url_img,
-        id_uploader: 1
+        id_uploader
       })
   }
 
@@ -60,19 +62,44 @@ class AddQuote extends Component {
       <div>
         {userLogged === true || adminLogged === true ?
           (
-            <div className="render-addquote-page" >
-              <TextField label="Personnage" name="personnage" value={personnage} onChange={this.handleInputChange} variant="outlined" />
-              <TextField label="Citation" name="citation" value={citation} onChange={this.handleInputChange} variant="outlined" multiline rowsMax="6" />
-              <TextField label="image url" name="url_img" value={url_img} onChange={this.handleInputChange} variant="outlined" multiline rowsMax="6" />
-              {isEditing ?
-              <Button onClick={this.handleEdit}>Editer</Button>
-              :
-              <Button onClick={this.handleSubmit}>Envoyer</Button>
-              }
+            <div className={isEditing ? 'render-addquote-page-editing' : 'render-addquote-page'}>
+              <div className="addquote-personnage">
+                <TextField label="Personnage" name="personnage" value={personnage} onChange={this.handleInputChange} variant="outlined" />
+              </div>
+              <div className="addquote-citation">
+                <TextField label="Citation" name="citation" value={citation} onChange={this.handleInputChange} variant="outlined" multiline rowsMax="6" />
+              </div>
+              <div className="addquote-url_image">
+                <TextField label="image url" name="url_img" value={url_img} onChange={this.handleInputChange} variant="outlined" multiline rowsMax="6" />
+              </div>
+              <div className="addquote-submit">
+                {isEditing ?
+                  <div className="addquote-edit-button">
+                    <Button variant="outlined" color="primary" onClick={this.handleEdit}>Editer</Button>
+                  </div>
+                  :
+                  <div className="addquote-submit-button">
+                    <Button variant="outlined" color="primary" onClick={this.handleSubmit}>Envoyer</Button>
+                  </div>
+                }
+              </div>
             </div>
           )
           :
-          <p>Vous devez être connecté pour pouvoir ajouter une citation</p>
+          (
+            <div className="render-addquote-page">
+              <div className="addquote-notlogged-p">
+                <Typography variant="body1" color="textSecondary" component="p">
+                  Vous devez être connecté pour ajouter une citation
+              </Typography>
+              </div>
+              <div className="addquote-notlogged-gosignin">
+                <NavLink to="/signin">
+                  <Button variant="outlined" color="primary">Se Connecter</Button>
+                </NavLink>
+              </div>
+            </div>
+          )
         }
       </div>
     )
