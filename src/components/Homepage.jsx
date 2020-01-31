@@ -3,12 +3,13 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import HomeQuotes from './HomeQuotes/HomeQuotes';
 import AddQuoteButton from './AddQuote/AddQuoteButton';
 import AddQuote from './AddQuote/AddQuote';
-import './homepage.css';
 import BottomNavbar from './Navbar/BottomNavbar';
 import SignUp from './Profile/Logg/SignUp';
 import SignIn from './Profile/Logg/SignIn';
 import Profile from './Profile/Profile';
 import Admin from './Profile/Admin';
+import { Alert } from '@material-ui/lab';
+import './homepage.css';
 
 class Homepage extends Component {
   constructor(props) {
@@ -16,10 +17,12 @@ class Homepage extends Component {
     this.state = {
       userLogged: false,
       adminLogged: false,
+      error: false,
       user: []
     };
     this.handleSignIn = this.handleSignIn.bind(this);
     this.handleSignOut = this.handleSignOut.bind(this);
+    this.handleErrorPrivilege = this.handleErrorPrivilege.bind(this);
   }
 
   handleSignIn(user) {
@@ -34,14 +37,25 @@ class Homepage extends Component {
 
   handleSignOut() {
     this.setState({
-      user: null, userLogged: false, adminLogged: false
+      user: [], userLogged: false, adminLogged: false
     })
   }
 
+  handleErrorPrivilege() {
+    this.setState({ error: !this.state.error })
+    setTimeout(() => {
+      this.setState({ error: !this.state.error });
+    }, 3500)
+  }
+
   render() {
-    const { userLogged, adminLogged } = this.state;
+    const { userLogged, adminLogged, user, error } = this.state;
     return (
       <div className="render-homepage">
+        {error &&
+          <div className="homepage-error-privilege">
+            <Alert severity="error">Veuillez vous connecter</Alert>
+          </div>}
         <div className="homepage-bottom-navbar">
           <BottomNavbar userLogged={userLogged} adminLogged={adminLogged} />
         </div>
@@ -53,7 +67,7 @@ class Homepage extends Component {
                 <div className="homepage-addquote-button">
                   <AddQuoteButton />
                 </div>
-                <HomeQuotes adminLogged={adminLogged} userLogged={userLogged} />
+                <HomeQuotes adminLogged={adminLogged} userLogged={userLogged} handleErrorPrivilege={this.handleErrorPrivilege} />
               </div>
             )}
           />
@@ -83,11 +97,12 @@ class Homepage extends Component {
             path="/profile"
             render={() => (
               <div>
-                {this.state.user[0] !== undefined && this.state.user[0] !== null ?
+                {user[0] !== undefined ?
                   <Profile
                     userId={this.state.user[0].id}
                     handleSignOut={this.handleSignOut}
                     userLogged={userLogged}
+                    user={this.state.user[0]}
                   />
                   :
                   <Redirect to="homepage" />

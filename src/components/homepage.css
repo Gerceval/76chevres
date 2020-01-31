@@ -15,3 +15,10 @@
   position: fixed;
   top: 92vh;
 }
+
+.homepage-error-privilege {
+  z-index: 6;
+  position: fixed;
+  top: 80vh;
+  left: 15vw;
+}

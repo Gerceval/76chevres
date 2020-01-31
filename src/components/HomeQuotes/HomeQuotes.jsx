@@ -11,7 +11,9 @@ class HomeQuotes extends Component {
       quotes: [],
       value: 0,
       cardExpanded: false,
-      openedItem: null
+      openedItem: null,
+      sortedByTop: false,
+      sortedByRecent: false
     };
     this.getTopQuotes = this.getTopQuotes.bind(this);
     this.getRecentQuotes = this.getRecentQuotes.bind(this);
@@ -22,44 +24,58 @@ class HomeQuotes extends Component {
   }
 
   componentDidMount() {
-    this.getTopQuotes();
+    const { quotes } = this.state;
+    if (quotes.length === 0) {
+      this.getTopQuotes();
+      this.setState({ sortedByTop: true })
+    }
   }
 
   getTopQuotes() {
     axios
       .get('/76/quotes/top')
       .then(res => res.data)
-      .then(data => this.setState({ quotes: data }));
+      .then(data => this.setState({ quotes: data, sortedByTop: true, sortedByRecent: false }));
   }
 
   getRecentQuotes() {
     axios
       .get('/76/quotes/recent')
       .then(res => res.data)
-      .then(data => this.setState({ quotes: data }))
+      .then(data => this.setState({ quotes: data, sortedByRecent: true, sortedByTop: false }))
   }
 
   upVote(quoteId) {
-    if (this.props.userLogged || this.props.adminLogged) {
+    const { sortedByRecent } = this.state;
+    const { handleErrorPrivilege, adminLogged, userLogged } = this.props;
+    if (userLogged || adminLogged) {
       axios
         .put(`/76/upvote/quote/${quoteId}/`)
-        .then(this.getTopQuotes())
-    }
+        .then(
+          sortedByRecent ? this.getRecentQuotes : this.getTopQuotes())
+    } else handleErrorPrivilege()
   }
 
   downVote(quoteId) {
-    if (this.props.userLogged || this.props.adminLogged) {
+    const { sortedByRecent } = this.state;
+    const { handleErrorPrivilege, adminLogged, userLogged } = this.props;
+    if (userLogged || adminLogged) {
       axios
         .put(`/76/downvote/quote/${quoteId}/`)
-        .then(this.getTopQuotes())
-    }
+        .then(
+          sortedByRecent ? this.getRecentQuotes : this.getTopQuotes()
+        )
+    } else handleErrorPrivilege()
   }
 
   deleteQuote(quoteId) {
+    const { sortedByRecent } = this.state;
     if (this.props.adminLogged) {
       axios
         .delete(`76/quote/${quoteId}`)
-        .then(this.getTopQuotes())
+        .then(
+          sortedByRecent ? this.getRecentQuotes : this.getTopQuotes()
+        )
     }
   }
 
@@ -84,9 +100,9 @@ class HomeQuotes extends Component {
           delete={this.deleteQuote}
           adminLogged={adminLogged}
           expandCard={this.expandCard}
-          cardExpanded={cardExpanded} 
+          cardExpanded={cardExpanded}
           openedItem={openedItem}
-          />
+        />
       </>
     );
   }

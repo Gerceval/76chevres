@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Typography } from '@material-ui/core/';
 import EditMyQuotes from './EditMyQuotes';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import './profile.css';
 
 class MyQuotes extends Component {
@@ -35,9 +37,10 @@ class MyQuotes extends Component {
   }
 
   editQuote(quoteId) {
-    this.setState({ 
-      isEditing: 'isEditing', 
-      openedItem: quoteId })
+    this.setState({
+      isEditing: 'isEditing',
+      openedItem: quoteId
+    })
   }
 
   remover() {
@@ -50,7 +53,12 @@ class MyQuotes extends Component {
     const { userLogged } = this.props;
     return (
       <div>
-        <h2>Editer mes quotes</h2>
+        <div className="myquotes-title">
+          <Typography variant="body1" color="textSecondary" component="p">
+            Mes citations
+          </Typography>
+          <ChevronRightIcon />
+        </div>
         <div className="profile-editmyquotes">
           {quotes ?
             <EditMyQuotes
