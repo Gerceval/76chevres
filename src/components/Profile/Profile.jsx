@@ -15,13 +15,15 @@ class Profile extends Component {
       return <Redirect to="/homepage" />
     }
     return (
-      <>
-      <p className="userGreeting">Bonjour {user.pseudo}</p>
-        <MyQuotes userId={userId} userLogged={userLogged} nightTheme={nightTheme} />
+      <div className="render-profile">
+        <p className="userGreeting">Bonjour {user.pseudo}</p>
+        <div className="profile-myquotes">
+          <MyQuotes userId={userId} userLogged={userLogged} nightTheme={nightTheme} />
+        </div>
         <div className="profile-signout">
           <Button onClick={this.props.handleSignOut} variant="outlined" color="primary">Me Déconnecter</Button>
         </div>
-      </>
+      </div>
     );
   }
 }

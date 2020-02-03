@@ -1,8 +1,8 @@
-DROP DATABASE 76chevres;
+DROP DATABASE C76;
 
-CREATE DATABASE 76chevres;
+CREATE DATABASE C76;
 
-USE 76chevres;
+USE C76;
 
 CREATE TABLE user (
   id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -27,14 +27,14 @@ CREATE TABLE quote (
 INSERT INTO user (pseudo, mail, profil_type)
   VALUES 
   ('Gerceval', 'gerceval@gmail.com', 'user'),
-  ('Karadark', 'karadark@gmail.com', 'user'),
   ('admin', 'admin', 'admin')
 ;
 
 INSERT INTO quote (personnage, url_img, citation, id_uploader) 
   VALUES 
+  ('Gandalf', 'https://vignette.wikia.nocookie.net/seigneur-des-anneaux/images/4/40/Gandalf_Le_Gris.jpg/revision/latest?cb=20180618171819&path-prefix=fr', "VOUS NE PASSEREZ PAS !", 1),
   ('Perceval', 'http://fr.web.img3.acsta.net/newsv7/16/11/25/16/38/164818.jpg', "C'est pas faux", 1),
-  ('Karadoc', 'https://i.skyrock.net/0872/38070872/pics/1486167394.jpg', "La joie de vivre et le jambon ! Y'a pas 36 solutions au bonheur !", 1),
-  ('Arthur', 'http://fr.web.img4.acsta.net/r_640_360/newsv7/19/01/27/15/43/1278026.jpg', "Sortez-vous les doigts du cul !", 1),
-  ('Kadok', 'https://www.onenagros.org/wordpress/wp-content/uploads/persos/Kadoc.jpg', "Le caca des canards c'est caca, faut pas toucher", 1)
+  ('Karadoc', 'https://i.skyrock.net/0872/38070872/pics/1486167394.jpg', "La joie de vivre et le jambon ! Y'a pas 36 recettes du bonheur !", 1),
+  ('Archy', 'https://i.pinimg.com/originals/7d/c9/f5/7dc9f5ab5c419490f6feddad8b082707.jpg', "C'est quoi un RocknRolla ?", 1),
+  ('Cooper', 'https://img.over-blog-kiwi.com/0/71/40/63/obpicD8UJyn.jpeg', "L’Homme est né sur Terre, rien ne l’oblige à y mourir", 1)
 ;
